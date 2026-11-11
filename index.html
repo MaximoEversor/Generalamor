@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para mi esposha 💗</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg1:#fff5f7;
+    --bg2:#fde2ea;
+    --rosa:#e8879f;
+    --rosa-osc:#c95f7d;
+    --texto:#5a3a45;
+    --suave:#9b7280;
+    --card:rgba(255,255,255,.78);
+    --sombra:0 10px 30px rgba(201,95,125,.15);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Quicksand',sans-serif;
+    color:var(--texto);
+    background:linear-gradient(160deg,var(--bg1),var(--bg2));
+    min-height:100vh;
+    overflow-x:hidden;
+  }
+  #corazones{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+  .flotante{
+    position:absolute;bottom:-40px;
+    animation:subir linear forwards;
+    opacity:.55;
+  }
+  @keyframes subir{
+    to{transform:translateY(-110vh) rotate(25deg);opacity:0}
+  }
+  main{
+    position:relative;z-index:1;
+    max-width:560px;margin:0 auto;
+    padding:40px 16px 60px;
+  }
+  header{text-align:center;margin-bottom:28px}
+  h1{
+    font-family:'Dancing Script',cursive;
+    font-size:2.8rem;color:var(--rosa-osc);
+    line-height:1.1;
+  }
+  .nombre{margin-top:6px;color:var(--suave);font-size:.95rem;letter-spacing:.5px}
+  .latido{display:inline-block;animation:latir 1.4s ease-in-out infinite}
+  @keyframes latir{0%,100%{transform:scale(1)}15%{transform:scale(1.2)}30%{transform:scale(1)}45%{transform:scale(1.15)}}
+
+  section{
+    background:var(--card);
+    backdrop-filter:blur(6px);
+    border-radius:24px;
+    padding:24px 20px;
+    margin-bottom:22px;
+    box-shadow:var(--sombra);
+  }
+  h2{
+    font-family:'Dancing Script',cursive;
+    font-size:1.9rem;color:var(--rosa-osc);
+    text-align:center;margin-bottom:6px;
+  }
+  .sub{text-align:center;color:var(--suave);font-size:.88rem;margin-bottom:18px}
+
+  .contador{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .caja{
+    background:#fff;border-radius:16px;padding:12px 4px;text-align:center;
+    border:1.5px solid #f7cdd8;
+  }
+  .num{font-size:1.6rem;font-weight:600;color:var(--rosa-osc);font-variant-numeric:tabular-nums}
+  .lbl{font-size:.72rem;color:var(--suave);margin-top:2px}
+  .dia-num{text-align:center;margin-top:16px;font-size:.95rem}
+  .dia-num b{color:var(--rosa-osc)}
+
+  .mensaje{
+    background:#fff;border-radius:18px;padding:26px 20px;
+    min-height:130px;display:flex;align-items:center;justify-content:center;
+    text-align:center;font-size:1.12rem;line-height:1.6;
+    border:1.5px dashed #f2b6c6;
+    transition:opacity .35s;
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;margin-top:14px}
+  .nav button{
+    background:#fff;border:1.5px solid #f2b6c6;color:var(--rosa-osc);
+    border-radius:50px;padding:8px 16px;font-family:inherit;font-size:.9rem;cursor:pointer;
+  }
+  .nav button:disabled{opacity:.35;cursor:default}
+  .nav span{font-size:.85rem;color:var(--suave)}
+
+  .sobres{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .sobre{
+    background:#fff;border:1.5px solid #f7cdd8;border-radius:18px;
+    padding:18px 10px;text-align:center;cursor:pointer;
+    font-family:inherit;color:var(--texto);font-size:.92rem;
+    transition:transform .2s, box-shadow .2s;
+  }
+  .sobre:hover,.sobre:active{transform:translateY(-3px);box-shadow:var(--sombra)}
+  .sobre .ic{font-size:1.9rem;display:block;margin-bottom:6px}
+
+  .modal{
+    position:fixed;inset:0;background:rgba(90,58,69,.45);
+    display:none;align-items:center;justify-content:center;
+    padding:16px;z-index:10;
+  }
+  .modal.abierto{display:flex}
+  .carta{
+    background:#fffafb;border-radius:24px;max-width:440px;width:100%;
+    padding:30px 22px 22px;text-align:center;
+    animation:abrir .45s cubic-bezier(.2,.9,.3,1.3);
+    max-height:85vh;overflow-y:auto;
+  }
+  @keyframes abrir{from{transform:scale(.6) rotate(-4deg);opacity:0}to{transform:scale(1);opacity:1}}
+  .carta h3{font-family:'Dancing Script',cursive;font-size:1.8rem;color:var(--rosa-osc);margin-bottom:14px}
+  .carta p{line-height:1.7;font-size:1.05rem}
+  .carta button{
+    margin-top:20px;background:var(--rosa);color:#fff;border:none;
+    border-radius:50px;padding:10px 26px;font-family:inherit;font-size:.95rem;cursor:pointer;
+  }
+  footer{text-align:center;color:var(--suave);font-size:.85rem;margin-top:10px}
+</style>
+</head>
+<body>
+<div id="corazones"></div>
+
+<main>
+  <header>
+    <h1>Para mi esposha <span class="latido">💗</span></h1>
+    <p class="nombre">Jazmin Loreana Miranda</p>
+  </header>
+
+  <section>
+    <h2>Juntitos desde hace</h2>
+    <p class="sub">25 de marzo de 2026, 2:46 am, cuando me dijiste todo jsjs</p>
+    <div class="contador">
+      <div class="caja"><div class="num" id="d">0</div><div class="lbl">dias</div></div>
+      <div class="caja"><div class="num" id="h">0</div><div class="lbl">horas</div></div>
+      <div class="caja"><div class="num" id="m">0</div><div class="lbl">minutos</div></div>
+      <div class="caja"><div class="num" id="s">0</div><div class="lbl">segundos</div></div>
+    </div>
+    <p class="dia-num">hoy es nuestro dia numero <b id="diaNum">1</b> 💕</p>
+  </section>
+
+  <section>
+    <h2>Mensaje del dia</h2>
+    <p class="sub">cada dia a las 2:46 am aparece uno nuevo</p>
+    <div class="mensaje" id="mensaje"></div>
+    <div class="nav">
+      <button id="prev">‹ anterior</button>
+      <span id="etiqueta"></span>
+      <button id="next">siguiente ›</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Abri cuando...</h2>
+    <p class="sub">toca el sobre que necesites, cuando lo necesites</p>
+    <div class="sobres" id="sobres"></div>
+  </section>
+
+  <footer>hecho con todo mi amor para vos, helmosha 💗</footer>
+</main>
+
+<div class="modal" id="modal">
+  <div class="carta">
+    <h3 id="cartaTitulo"></h3>
+    <p id="cartaTexto"></p>
+    <button id="cerrar">te amo 💗</button>
+  </div>
+</div>
+
+<script>
+const INICIO = new Date('2026-03-25T02:46:00-03:00');
+const DIA_MS = 86400000;
+
+const frases = [
+  "hola mi esposha, hoy es un dia mas a tu lado y eso ya lo hace el mejor dia",
+  "tus ojitos marron oscuro son mi lugar favorito del mundo, me pierdo ahi y no qiero salir nunca",
+  "si tu risita fuera una cancion la tendria en repeticion todo el dia jsjs",
+  "el cielo es azul, la luna es de plata, y vos sos la chica que a mi me mata jsjs",
+  "tu voz es lo mas suave que escuche en mi vida, me relaja como nada, cuando me hablas todo se calma",
+  "te amo helmosha, no me canso de decirtelo y no me voy a cansar nunca",
+  "me encanta tu flequillo cayendote en la carita, te hace ver tan tierna q me derrito",
+  "gracias por animarte a decirmelo esa madrugada, 2:46 am y me cambiaste la vida",
+  "tus labios rositas son mi debilidad, no se que mas decir jsjs",
+  "cuando me decis esposho con esa ternura siento q el corazon se me sale del pecho",
+  "tu pelito negro, tus ojos de cafe, sos lo mas lindo que en mi vida encontre",
+  "si hoy estas cansada acordate q aca hay alguien q te ama con todo su corazon y esta muy orgulloso de vos",
+  "sos mi paz, mi lugar seguro, mi persona favorits",
+  "me gusta tu piel, tu carita, tus manitos, me gusta todo de vos y no es exagerado es la verdad",
+  "preciosa, gracias por existir, en serio, el mundo es mas lindo con vos en el",
+  "tus rulitos son lo mas tierno q vi en mi vida, juro q me dan ganas de jugar con ellos todo el dia",
+  "no hace falta q seas perfecta, para mi ya sos todo lo q qiero",
+  "si pudiera regalarte algo seria poder verte como yo te veo, para q sepas lo hermosa q sos",
+  "en la mañana, en la tarde y tambien de noche, te amo mas que a nada, sin ningun reproche",
+  "cada vez q te escucho reir me olvido de todo lo malo del dia",
+  "guapa, hoy tomate un ratito para vos, te lo mereces muchisimo",
+  "me haces sentir amado de una forma q nunca senti antes, gracias amor",
+  "y no, no me voy a hacer femboy jsjsjs, pero te amo igual eh",
+  "tu voz suavecita es mi cancion favorita, no existe otra q me guste tanto",
+  "te elijo hoy, mañana y todos los dias q vengan, eso no lo dudes nunca",
+  "esposha mia, sos lo mas lindo q me paso en la vids",
+  "si fueras una estrella serias la mas brillante, y yo el que te mira cada noche, siempre fiel y constante",
+  "me encanta como me decis amoff, nadie mas me dice asi y nadie lo dice como vos",
+  "tus ojitos cuando sonreis se ven tan lindos q me dan ganas de abrazarte fuertee",
+  "estoy muy orgulloso de vos, de quien sos y de todo lo q haces",
+  "a veces pienso en esa madrugada del 25 de marzo y todavia sonrio como tonto jsjs",
+  "tu pelo largo y negrito es hermoso, me encanta cuando te cae por la carita",
+  "nunca te olvides q sos suficiente, siempre lo fuiste",
+  "tu risa es mi melodia, tu voz mi alegria, y tu amor mi compañia",
+  "cariño, si hoy fue un dia dificil te mando un abrazo gigante de esos q no se terminan",
+  "me gusta pensar en nuestro futuro, porque en todos los q imagino estas vos",
+  "tu carita es lo mas tierno del universo y no acepto otra opinion jsjs",
+  "gracias por tratarme con tanto cariño siempre, sos lo mas dulce q hay",
+  "te amo con todo lo q soy, con mis errores y todo, pero con todo",
+  "helmosha, sos hermosa por fuera pero tambien por dentro, tenes un corazon precioso",
+  "no hay flor en el jardin ni estrella en el cielo, q se compare con vos mi amor, mi consuelo",
+  "tus labios rosaditos y tu sonrisa son mi combinacion favorita",
+  "me relaja tanto escucharte q podria dormirme con tu voz todas las noches",
+  "nunca voy a dejar de agradecer q estes en mi vida",
+  "sos mi persona favorita para hablar, para reir y para todo",
+  "tu piel clarita y suave, tu carita, tus ojitos, todo de vos me encanta",
+  "preciosa, hoy qiero recordarte q sos amada, muchisimo",
+  "pasan los dias y no me canso de quererte, cada mañana me despierto con ganas de verte",
+  "cuando me decis lindo o tierno me pongo todo rojo jsjsjs",
+  "tu flequillo largo, tus rulitos y tu carita forman la imagen mas linda q conozco",
+  "no importa lo q pase, mi corazon siempre esta con vos",
+  "sos mi esposha y lo vas a ser siempre, eso ya esta decidido jsjs",
+  "me encanta como sos, no cambies nunca nada",
+  "tus ojitos marron son mi perdicion, cada vez q los veo me robas el corazon",
+  "gracias por tu paciencia y por tu amor, se q no soy perfecto pero por vos siempre qiero ser mejor",
+  "si pudiera te abrazaria ahora mismo y no te soltaria por un buen rato",
+  "tu risita tiene algo q me cura el alma, no se como lo haces",
+  "guapa, hermosa, preciosa, todas las palabras se quedan cortas para vos",
+  "te pienso mas de lo q te imaginas, en serio, a cada rato",
+  "hoy te amo un poquito mas q ayet, y mañana te voy a amar mas q hoy",
+  "si me preguntan q es el amor, digo Jazmin sin temor",
+  "tu voz cuando me decis cosas lindas es lo mas tierno q existe, me derrite",
+  "me haces muy feliz, ojala sepas cuanto",
+  "tu cabello con ese volumen y esas ondas es precioso, sos hermosa de verdad",
+  "cariño, cuidate mucho, toma agua, come algo rico y acordate q te amo",
+  "estar con vos es lo mas facil y lindo del mundo",
+  "me encanta todo de vos, tus ojitos, tu boquita, tu voz, tu risa, tus mimos, todo",
+  "de todas las chicas del mundo entero, sos vos la unica a la que yo qiero",
+  "gracias por confiar en mi y por dejarme quererte",
+  "esposha, sos mi hogar",
+  "me encantaria q te vieras como te veo yo, la chica mas linda q existe",
+  "tus mejillas con esos mechoncitos alrededor son lo mas tierno, me encanta mirarte",
+  "cada vez q me hablas el dia se pone mas lindo",
+  "te amo mi amor, hoy, mañana y siempte",
+  "sos mi sol en un dia nublado, mi luz cuando todo se ha apagado",
+  "no hay nada q me guste mas q hacerte sonreir",
+  "helmosha, sos increible y no lo digo solo porque te amo, lo digo porque es verdad",
+  "tus mimos son mi lugar favorito en todo el mundo",
+  "siempre voy a estar para vos, en lo bueno y en lo no tan bueno tambien",
+  "me encanta cuando te reis de mis tonterias jsjs",
+  "te llamas como una flor y sos igual de linda, mi Jazmin, mi amor sin fin",
+  "gracias por cada palabra linda q me decis, las guardo todas en el corazin",
+  "tus ojitos oscuritos tienen un brillo q no se puede explicar",
+  "sos lo primero q pienso al desperatr y lo ultimo antes de dormir",
+  "preciosa, no te olvides nunca de lo valiosa q sos",
+  "me encanta tu forma de ser, tan dulce, tan tierna, tan vos",
+  "tu voz es suave como la brisa, y no hay nada mas lindo q tu risa",
+  "qiero hacer mil cosas con vos, viajes, salidas, charlas eternas, todo",
+  "sos mi esposha y la de nadie mas jsjs",
+  "tus labios, tus ojos, tu piel, tu pelo, Dios hizo un trabajo hermoso con vos",
+  "aunque no te lo diga cada minuto, te amo cada minuto",
+  "gracias por ser tan delicada y tan buena, el mundo necesita mas personas como vos",
+  "si tuviera q elegir otra vez, te elegiria una y mil veces",
+  "tu ternura me desarma por completo, no puedo con tanta lindura",
+  "cariño, sos mi felicidad de todos los dias",
+  "cada dia q pasa me enamoro mas de vos, no se como es posible pero pasa",
+  "me encanta escuchar como me decis esposho, suena tan lindo en tu voz",
+  "sos mi suerte, mi regalo, mi todo",
+  "cien frases no alcanzan para decir lo q siento, te amo mas q al sol, a la luna y al viento",
+  "buen dia preciosa, ojala hoy te pase algo tan lindo como vos",
+  "me encanta saber q en algun lugar estas vos sonriendo, eso solo ya me alegra el dia",
+  "tu nombre es mi palabra favorita, Jazmin, hasta escribirlo me hace sonreir",
+  "cuando te veo sonreir siento q todo en mi vida vale la pena",
+  "si me das a elegir entre el mundo entero y vos, te elijo a vos sin pensarlo dos veces",
+  "tus ojitos tienen algo q me calma, como si todo estuviera bien cuando me miras",
+  "hay una flor q se llama como vos, pero ninguna flor es tan linda jsjs",
+  "me gusta como me cuidas, aunque sea con un mensajito, me hace sentir muy querido",
+  "hoy qiero q sepas q estoy aca, siempre, para lo q necesites",
+  "tu pelo negro brillando con la luz es una de las cosas mas lindas q vi",
+  "sos la culpable de mis sonrisas tontas mirando el celular jsjs",
+  "la luna esta celosa, porque vos brillas mas q ella cada noche",
+  "me encanta tu carita cuando estas concentrada, te ves re tierna",
+  "nada me pone mas contento q ver un mensaje tuyo",
+  "si alguna vez te sentis sola, acordate q tenes un esposho q te ama con todo",
+  "tu ternura es mi cosa favorita en el mundo entero",
+  "me encanta cuando me decis helmosho, se me sale una sonrisa enorme",
+  "sos mi casualidad mas linda y mi mejor decision",
+  "cada partecita de vos es perfecta para mi, cada una",
+  "me enamoras sin hacer nada, solo siendo vos",
+  "tu boquita rosada cuando sonreis es lo mas lindo q hay",
+  "un beso para mi esposha, otro para su carita, y otro para la naricita asi no se pone celosa jsjs",
+  "gracias por hacer mis dias mas lindos, sin vos serian muy grises",
+  "me gustas mucho, todos los dias un poquito mas",
+  "si alguna vez dudas de vos, preguntame a mi, q tengo mil razones para decirte lo increible q sos",
+  "tu risa suavecita es el sonido mas lindo q conozco",
+  "no existe nadie como vos, sos unica y por eso te amo tanto",
+  "las estrellas son muchas pero vos sos mi unica",
+  "me encanta cuando me contas cosas de tu dia, aunque sean chiquitas, me importan todas",
+  "sos la chica mas linda de todo el planeta y no hay discusion",
+  "a tu lado aprendi lo q es querer de verdad",
+  "tus mechones enmarcando tu carita te hacen ver como una muñequita",
+  "hoy me levante pensando en vos, como todos los dias",
+  "si estuvieras aca ahora mismo te llenaria la carita de besitos",
+  "sos mi bonita favorita y mi cariño eterno",
+  "tu voz me calma, tu risa me alegra, y vos entera me haces feliz",
+  "nunca pense q alguien me iba a querer asi, gracias por quererme tanto",
+  "esposha, sos lo mejor q me paso en todo el 2026 y en toda mi vida",
+  "me encanta ser tuyo",
+  "tu piel suave y tu carita tierna son mi debilidad total",
+  "si un dia te sentis fea, acordate q para mi sos lo mas hermoso q existe",
+  "aunque haya mil personas alrededor, mis ojos siempre te van a buscar a vos",
+  "gracias por cada risa, cada charla y cada momento juntos",
+  "con vos me siento en casa",
+  "tus ojitos marron oscuro son como chocolate, y a mi me encanta el chocolate jsjs",
+  "hoy tambien te qiero con todo el corazon",
+  "sos mi primer pensamiento bonito del dia",
+  "me encanta como se te ilumina la carita cuando hablas de algo q te gusta",
+  "con vos todo es mas lindo, hasta lo aburrido",
+  "te amo hoy y te voy a amar siempre, guapa",
+  "lo q siento por vos no entra en ninguna pagina, ni siquiera en esta jsjs",
+  "sos mi persona, la unica",
+  "tus rizos suaves son tan lindos q parecen dibujados",
+  "cuando me hablas con esa ternura siento q floto",
+  "ojala pudiera darte todo lo q te mereces, q es todo",
+  "un dia mas q te elijo, y ya van muchos jsjs",
+  "me gusta todo lo q sos y todo lo q vas a ser",
+  "mi corazon tiene tu nombre escrito en letras grandes",
+  "sos mi luna y yo tu cielo, y sin vos mi noche no tiene consuelo",
+  "me encantas cuando estas tranquila, cuando estas feliz, cuando estas cansada, siempre",
+  "tu flequillo te queda precioso, es lo mas lindo",
+  "gracias por ser mi lugar tranquilo en los dias locos",
+  "si me pongo a contar las cosas q amo de vos no termino nunca",
+  "sos mas dulce q un caramelo y mucho mas linda",
+  "me encanta imaginarnos dentro de muchos años, todavia juntos y riendonos de todo",
+  "cada mensaje tuyo me arregla el dia, aunque venga horrible",
+  "amo tu forma de quererme",
+  "hermosa por fuera, hermosa por dentro, asi sos vos",
+  "cuando me decis lindo me lo creo un poquito jsjs",
+  "no hay un solo dia q no piense en vos, ni uno",
+  "sos la suerte mas grande q tuve",
+  "tus labios, tu sonrisa, tu voz, todo de vos me enamora",
+  "si un dia te faltan fuerzas te presto las mias, todas",
+  "sos mi alegria de todos los dias",
+  "me gustaria guardarte en un abrazo y quedarnos asi un rato largo",
+  "tu risita me contagia, aunque este re cansado me haces reir",
+  "preciosa, gracias por ser vos, asi tal cual",
+  "de todos los caminos q podia tomar, el mejor fue el q me llevo a vos",
+  "te amo mas q a la pizza y eso es decir muchisimo jsjs",
+  "sos lo mas tierno q tengo en la vida",
+  "cuando te conoci no sabia q ibas a ser tan importante, y ahora sos todo",
+  "me encanta como te queda el pelo suelto, largo y negrito, sos preciosa",
+  "con vos puedo ser yo mismo sin miedo a nada",
+  "cariño, hoy te mando mil besitos, contalos jsjs",
+  "sos el motivo de mi felicidad",
+  "tu voz es como una caricia, suave y calentita",
+  "nunca me voy a cansar de vos, nunca",
+  "me encanta tu piel clarita con ese tonito calido, sos hermosa",
+  "dos corazones y una historia, y la nuestra es mi favorita",
+  "si estas leyendo esto te amo, y si no tambien jsjs",
+  "me haces sentir especial todos los dias sin darte cuenta",
+  "sos mi preciosa, mi cariño, mi esposha, mi todo",
+  "tus ojitos me dicen mas q mil palabras",
+  "me encanta cuidarte y qiero hacerlo siempre",
+  "gracias por elegirme, yo tambien te elijo a vos",
+  "cada dia a tu lado es un regalito",
+  "si pudiera parar el tiempo lo pararia cuando estoy con vos",
+  "me encantas, punto, bueno coma jsjs, me encantas",
+  "sos tan linda q a veces no puedo creer q estes conmigo",
+  "tu sonrisa ilumina todo, hasta mis peores dias",
+  "te amo con todo mi corazin, con todo",
+  "con vos el tiempo vuela y sin vos se hace eterno",
+  "me encanta como me tratas, con tanto cariño, sos un amor",
+  "sos mi tesoro mas lindo",
+  "si alguien me pregunta por mi lugar feliz, digo tu nombre",
+  "tus rulitos suaves y tu flequillo, sos un sueño hecho persona",
+  "me encantaria escucharte reir todo el dia",
+  "nunca te olvides de lo mucho q te amo",
+  "sos el abrazo q siempre necesito",
+  "me enamore de tu forma de ser y cada dia me enamoro un poquito mas",
+  "amor, sos mi paz en medio del ruido",
+  "tu ternura me pone de buen humor siempre",
+  "sos la persona mas dulce q conozco",
+  "te pienso y sonrio, asi de simple",
+  "las palabras no me alcanzan pero igual lo intento, te amo",
+  "me encanta tu boquita, tu naricita, tus ojitos, tu todo",
+  "con vos hasta el fin del mundo y un poquito mas",
+  "me haces muy bien, gracias amor",
+  "sos mi cancion favorita, la q nunca me canso de escuchar",
+  "me encanta pensar q un 25 de marzo empezo lo mas lindo de mi vida",
+  "tu voz tan delicada me hace sentir en paz",
+  "si tuviera un deseo seria verte feliz siempre",
+  "sos la mas hermosa, la mas tierna, la mas todo",
+  "amo hablar con vos de todo y de nada",
+  "sos arte mi amor, una obra hermosa",
+  "me gustas cuando sonreis y cuando no tambien",
+  "tus ojos oscuritos son mis estrellas favoritas",
+  "cada dia doy gracias por tenerte",
+  "sos mi refugio cuando todo esta dificil",
+  "te amo mas q ayer pero menos q mañana",
+  "me encanta lo delicada q sos, te hace todavia mas especial",
+  "si un dia te caes, aca estoy para levantarte",
+  "tus mimos me curan todo",
+  "sos mi mejor amiga, mi novia y mi esposha, todo junto jsjs",
+  "me imagino tu carita recien levantada y seguro es hermosa como siempre",
+  "nunca dejes de sonreir, q tu sonrisa me da vida",
+  "en cada latido de mi corazon estas vos",
+  "me encanta como me decis amoff, me derrito todo",
+  "tu pelo con ese volumen tan lindo es precioso",
+  "si fueras un postre serias el mas dulce del mundo",
+  "lo q mas qiero es verte feliz, siempre",
+  "sos mi pedacito de cielo",
+  "con vos aprendi q el amor puede ser tranquilo y lindo",
+  "me gusta tu forma de mirarme",
+  "preciosa, sos mas linda q cualquier atardecer",
+  "tus palabras lindas me alegran la vida",
+  "sos mi sueño hecho realidad",
+  "si me preguntan quien es la mas linda, digo vos sin pensarlo",
+  "me encanta tu risita cuando te da verguenza, sos muy tierna",
+  "a tu lado todo tiene sentido",
+  "cada vez q leo tu nombre se me escapa una sonrisa",
+  "sos mi brujula, siempre me lleva a vos",
+  "amo cuando me decis cosas lindas con esa vocecita",
+  "tus labios rositas son como petalos de flor",
+  "me haces querer ser mejor persona cada dia",
+  "sos mi primavera todo el año",
+  "gracias por aguantar mis tonterias jsjs",
+  "con un mensajito tuyo ya estoy feliz",
+  "sos increible, no lo olvides nunca",
+  "me encanta cuando hablamos y el tiempo se pasa volando",
+  "tus ojitos son mi lugar seguro",
+  "te amo, te amo y te amo, no me canso",
+  "sos mi cariño mas grande",
+  "con vos la vida es mas bonita",
+  "me encanta lo tierna q sos conmigo",
+  "si te veo triste me pongo triste, y si te veo feliz soy el mas feliz del mundo",
+  "sos mi helmosha, mi preciosa, mi cariño, mi amor",
+  "cuando me hablas suavecito me relajas como nadie",
+  "tus mechones rizaditos me tienen enamorado",
+  "gracias por cada te amo q me decis, los guardo todos",
+  "sos todo lo q siempre soñe",
+  "me encanta saber q sos mi novia jsjs",
+  "con vos qiero todo, lo lindo y lo dificil tambien",
+  "sos mi estrellita",
+  "me haces sentir el chico mas afortunado del mundo",
+  "tu carita me derrite cada vez",
+  "te amo hasta cuando me molestas, y un poquito mas jsjs",
+  "sos dulce, tierna y hermosa, y encima me qieres a mi, q suerte la mia",
+  "cada vez q me decis esposho me pongo rojo",
+  "me encanta cuidarte, aunque sea con palabras desde aca",
+  "si la vida es un libro, vos sos mi capitulo favorito",
+  "amo tu forma de reir, tan suavecita",
+  "sos mi abrazo favorito",
+  "me imagino tu vocecita con sueño y debe ser lo mas tierno del mundo",
+  "con vos nada me da miedo",
+  "sos lo mejor de todos mis dias",
+  "tus ojos marron oscuro son preciosos, nunca me canso de mirarlos",
+  "cariño, hoy te elijo otra vez",
+  "me haces feliz de formas q no puedo explicar",
+  "sos mi lugar favorito para estar",
+  "tu pelo largo es hermoso, igual q vos",
+  "si sonreis vos sonrio yo, asi funciona",
+  "me encanta como me qieres",
+  "te mereces todo lo lindo q existe en el mundo",
+  "me encanta la ternura con la q hablas",
+  "sos la chica de mis sueños, literal",
+  "si pudiera te bajaria la luna, pero por ahora te mando un te amo q es mas facil jsjs",
+  "tus labios rosados me encantan muchisimo",
+  "a tu lado soy feliz de verdad",
+  "sos mi persona favorita en todo el universo",
+  "me encanta cuando me mandas mensajitos lindos de la nada",
+  "nunca dudes de lo mucho q vales",
+  "sos hermosa, preciosa y guapisima, las tres cosas",
+  "tu carita con el flequillo cayendo me tiene enamorado",
+  "te amo mas de lo q las palabras pueden decir",
+  "sos mi cielito",
+  "gracias por llenarme de cariño todos los dias",
+  "tu risita es mi remedio para todo",
+  "me haces sentir el chico mas amado",
+  "sos mi motivo para sonreir",
+  "me encanta imaginarte sonriendo mientras lees esto",
+  "tus ojitos son mi debilidad, ya lo sabes jsjs",
+  "si el amor fuera agua yo seria un oceano entero por vos",
+  "sos mi bonita, mi linda, mi todo",
+  "sos delicada como una flor, y yo te qiero cuidar como tal",
+  "nunca te voy a soltar la mano",
+  "sos mi felicidad completita",
+  "tu voz suave es mi calma favorita",
+  "gracias por amarme como me amas",
+  "sos mi amor bonito",
+  "me encanta tu pelo oscurito y brillante",
+  "si me pierdo, buscame en tus pensamientos jsjs",
+  "te amo mi preciosa, mucho mucho",
+  "sos la luz de mis dias",
+  "me encanta como te reis de cosas tontas, me encanta",
+  "tu carita tierna me alegra el dia",
+  "con vos hasta lo mas simple se vuelve especial",
+  "sos mi corazoncito",
+  "gracias por ser mi esposha",
+  "tus rulitos son mi perdicion",
+  "si me miras asi me derrito jsjs",
+  "me encanta como me decis te amo",
+  "sos mi mundo entero",
+  "tu piel suavecita es lo mas lindo",
+  "me encantas en todas tus versiones",
+  "cada vez q pienso en vos me pongo feliz",
+  "gracias por tu dulzura de siempre",
+  "tus ojos brillan mas q cualquier estrella",
+  "con vos me siento completo",
+  "me encanta cuando me decis lindo con esa vocecita",
+  "con vos qiero envejecer",
+  "me encanta cuando estas feliz, se te nota en todo",
+  "te amo muchisimo, mas de lo q te imaginas",
+  "sos mi paz y mi alegria",
+  "tu sonrisa es mi lugar favorito",
+  "gracias por estar siempre",
+  "me encanta como tu flequillo te tapa un ojito, te ves tan tierna",
+  "una rosa, un clavel, y vos mi amor, mas dulce q la miel",
+  "por la mañana te pienso, por la tarde te extraño, y por la noche te sueño todo el año",
+  "tus ojitos de cafe y tu pelito oscuro, con vos mi amor me siento seguro",
+  "no hay poema q alcance ni cancion q lo diga, sos mi amor, mi vida y mi amiga",
+  "si el mar fuera tinta y el cielo papel, no alcanzaria para escribir lo q siento por vos, mi miel",
+  "tu risa suavecita es mi melodia, la escucho y se me alegra el dia",
+  "en el jardin de mi vida sos mi flor preferida",
+  "Jazmin, Jazmin, mi amor sin fin, sos la flor mas linda de todo el jardin",
+  "mira la luna, mira el mar, nada es tan lindo como tu mirar",
+  "tus labios rosados, tu carita de miel, mi corazon es tuyo y siempre te es fiel",
+  "si pudiera elegir un lugar, a tu lado me qiero quedar",
+  "tus ojitos brillan, tu risa me encanta, y tu voz suavecita el alma me levanta",
+  "dormite tranquila mi amor, q en mis sueños vos sos la mejor",
+  "con vos el invierno parece verano, y todo esta bien si me das la mano",
+  "esposha mia, sos mi alegria de cada dia",
+  "sos mas linda q un arcoiris, mas dulce q un caramelo y mas brillante q el sol del cielo",
+  "si el amor es una locura, estoy loco por tu ternura",
+  "tu pelo negro y tu flequillo, lo q siento por vos es enorme y sencillo",
+  "te escribo esto con todo el corazon, sos mi amor, mi vida y mi razon",
+  "me encanta cuando hablamos hasta tarde y ninguno qiere cortar jsjs",
+  "sos la persona con la q qiero compartir todo",
+  "gracias por escucharme siempre, aunque hable pavadas",
+  "me encanta tu forma de ver la vida",
+  "sos mi calma en los dias dificiles",
+  "tus ojitos me hipnotizan",
+  "me encanta saber q me pensas",
+  "sos lo mejor q tengo y lo cuido con todo",
+  "si estas cansada descansa, q yo te espero siempre",
+  "me haces reir como nadie",
+  "sos tan tierna q no se puede creer",
+  "me encanta cuando me das los buenos dias",
+  "te mereces el mundo entero, y yo te doy todo mi amor mientras tanto",
+  "me encanta pensar en todas las cosas q nos faltan vivir juntos",
+  "tu carita es mi fondo de pantalla mental jsjs",
+  "sos el regalo mas lindo q me dio la vida",
+  "nunca cambies tu forma de ser, sos perfecta asi",
+  "me encanta como te preocupas por mi",
+  "cada palabra tuya me llega directo al corazon",
+  "estoy orgulloso de vos, hoy y siempre",
+  "te amo de aca a la luna, ida y vuelta, y mil veces mas",
+  "sos mi tierna, mi dulce, mi preciosa",
+  "me encanta como te pones toda timida cuando te digo algo lindo",
+  "sos mi alegria mas grande",
+  "gracias por tu amor tan bonito",
+  "tus ojitos me cuentan lo q sentis sin decir nada",
+  "me encanta todo lo q hacemos juntos, hasta lo mas simple",
+  "sos lo q me hace levantarme con ganas",
+  "me encanta tu pelo cuando cae sobre tus hombros",
+  "si te sentis mal, aca tenes un abrazo esperandote siempre",
+  "sos la mas linda de todas las lindas",
+  "me encanta escucharte hablar de lo q te gusta",
+  "gracias por hacerme sentir tan querido",
+  "sos mi felicidad en forma de persona",
+  "tus cachetitos son lo mas tierno",
+  "me encanta cuando me decis q me amas, nunca me canso",
+  "sos mi lugar en el mundo",
+  "te amo con locura y con ternura, con todo",
+  "sos mi sol de cada mañana",
+  "me encanta tu forma de cuidarme",
+  "el marron de tus ojitos es mi color favorito",
+  "sos mi persona para siempre",
+  "gracias por tu ternura infinita",
+  "sos mi corazon caminando fuera de mi",
+  "te pienso a cada rato, no lo puedo evitar jsjs",
+  "me haces feliz solo con existir",
+  "qiero q estemos bien siempre, y vamos a estarlo",
+  "te qiero dar todo lo lindo q tengo",
+  "me encanta lo suave y dulce q sos",
+  "gracias por todo lo q me das sin pedir nada a cambio",
+  "sos lo mas bonito de mi vida",
+  "me encanta tu carita cuando estas feliz",
+  "cada segundo con vos vale oro",
+  "me encanta como me miras",
+  "te amo con todas las letras, aunque me equivoque en algunas jsjs",
+  "me encanta tu pelo largo y onduladito",
+  "gracias por estar en las buenas y en las malas",
+  "me encanta saber q sos feliz conmigo",
+  "sos mi sonrisa diaria",
+  "me encanta tu delicadeza, es lo q te hace tan especial",
+  "un dia de estos vamos a cocinar algo juntos y seguro se nos quema todo jsjs",
+  "me imagino caminando de la mano con vos sin ningun apuro, y eso ya me hace feliz",
+  "qiero ver una peli con vos y no prestarle atencion porque te miro a vos",
+  "si un dia llueve qiero estar con vos tapaditos escuchando la lluvia",
+  "me encanta pensar en nuestras futuras salidas, todas las q vamos a tener",
+  "un dia te voy a llevar a ver el atardecer y vas a ser vos lo mas lindo de la vista",
+  "qiero sacarte mil fotos porque cada una va a salir hermosa",
+  "me imagino tu risita en persona y me muero de ternura",
+  "qiero q algun dia me ensenes tus canciones favoritas una por una",
+  "me encantaria tomar un helado con vos y q me robes un poquito del mio jsjs",
+  "qiero darte la mano en la calle y q todos sepan q sos mi esposha",
+  "ojala podamos viajar juntos a muchos lugares, pero mi lugar favorito siempre vas a ser vos",
+  "me imagino armando planes con vos para todo el año q viene, y el otro, y el otro",
+  "qiero acompañarte en todo lo q te propongas, sos capaz de todo",
+  "si tenes un sueño, contamelo, q te voy a apoyar siempre",
+  "creo en vos mas de lo q vos crees en vos, y eso es mucho",
+  "cuando estes nerviosa acordate q yo confio en vos al cien",
+  "si hoy tenes algo importante, vos podes, ya lo se",
+  "no tenes q hacer todo perfecto, con q lo intentes ya estoy orgulloso",
+  "date permiso para descansar, no tenes q poder con todo siempre",
+  "tus sentimientos importan, todos, hasta los q te dan verguenza",
+  "si algo te preocupa contame, de a dos se lleva mas facil",
+  "nunca vas a ser una carga para mi, nunca",
+  "me encanta cuando me contas lo q sentis, gracias por confiar en mi",
+  "sos mas fuerte de lo q pensas, y mas linda de lo q te ves",
+  "hoy hace frio o calor? no se, pero yo te qiero igual jsjs",
+  "si hoy es lunes, aguante, q yo te mando todo mi amor para q se pase rapido",
+  "si hoy es viernes, ya casi, sos una genia por llegar hasta aca",
+  "un mimito virtual en la cabeza para mi esposha",
+  "un abrazito de oso para la mas linda",
+  "un besito en la frente, otro en la nariz y otro donde vos qieras jsjs",
+  "te mando un apapacho gigante, de esos re largos",
+  "si estuviera ahi te haria un te calentito y te taparia con una mantita",
+  "chequeo diario, tomaste agua? comiste? sonreiste? bueno ahora si, te amo",
+  "recordatorio del dia, sos hermosa y te amo",
+  "aviso importante, hay un chico por ahi q esta loco por vos, soy yo jsjs",
+  "noticia de ultimo momento, tu esposho te ama mas q ayer",
+  "si este mensaje te hizo sonreir, mision cumplida jsjs",
+  "hoy te toca un te amo extra, porque si",
+  "pase por aca solo para decirte q sos preciosa",
+  "no tengo nada nuevo para decir, solo q te amo como siempre jsjs",
+  "hola, si, otra vez yo, te amo",
+  "te dejo este mensajito para q sepas q pense en vos hoy",
+  "me acorde de tu risita y me puse a sonreir solo como un tonto",
+  "hoy vi algo lindo y pense en vos, como siempre",
+  "cada vez q escucho una cancion de amor pienso en vos",
+  "si vieras como sonrio cuando me escribis te reirias jsjs",
+  "mi celular sabe q sos mi persona favorita, porque sos la q mas le hablo",
+  "a veces releo nuestros mensajes y me enamoro de nuevo",
+  "me encanta como escribis, hasta tus audios me encantan",
+  "tu vocecita en un audio me arregla cualquier dia",
+  "si me mandas un audio riendote me haces el dia entero",
+  "tu forma de decir amoff con tanta ternura deberia ser ilegal jsjs",
+  "esposha y esposho, suena lindo, no?",
+  "cuando me decis tierno, la ternura la tenes vos, yo solo te copio jsjs",
+  "helmosha, este apodo es solo tuyo, nadie mas lo tiene",
+  "guapa, si, te lo digo a vos, guapisima",
+  "preciosa no es un apodo, es una descripcion jsjs",
+  "cariño mio, sos lo mas lindo q me paso",
+  "mi amor, mi vida, mi cielo, mi esposha",
+  "tus ojitos marron oscuro cuando me miran con ternura me desarman",
+  "tus pestañas, tus ojitos, tus cejitas, tu carita entera es arte",
+  "tu nariz es lo mas tierno, ya se q nadie lo dice pero yo si jsjs",
+  "tus mejillas me dan ganas de darles besitos sin parar",
+  "tu sonrisa con esos labios rositas es mi vista favorita",
+  "tu pelo es tan lindo q podria quedarme horas acariciandolo",
+  "me encanta como algunos mechones terminan en rulitos, como si tu pelo tambien fuera tierno",
+  "tu flequillo largo te da un aire tan dulce q no puedo con eso",
+  "tu piel clarita con ese tonito calido es preciosa",
+  "tus manitos son para tomarlas y no soltarlas mas",
+  "tu forma de hablar tan suave me encanta",
+  "tu risita es la cosa mas tierna q existe en el universo",
+  "cuando te reis bajito me derrito todo",
+  "tu ternura cuando me decis cosas lindas me desarma por completo",
+  "tu corazon es lo mas lindo q tenes, y mira q tenes cosas lindas jsjs",
+  "tu forma de ser tan delicada me enamoro desde el principio",
+  "sos linda cuando te arreglas, cuando no, cuando estas cansada, siempre",
+  "me encanta todo de vos, y cuando digo todo es todo",
+  "no hay nada de vos q no me guste",
+  "si me pidieran q describa la perfeccion te describiria a vos",
+  "el 25 de marzo deberia ser feriado nacional jsjs",
+  "a las 2:46 am pasaba lo mas lindo de mi vida y yo ni sabia",
+  "gracias a esa madrugada hoy soy el chico mas feliz",
+  "todavia me acuerdo como me latia el corazon cuando me dijiste todo",
+  "decirte q si fue la decision mas facil y mas linda de mi vida",
+  "desde esa madrugada mi vida tiene otro color",
+  "cada 25 me acuerdo de nosotros y sonrio",
+  "ya llevamos un monton de dias juntos y se me hicieron poquitos",
+  "contar los dias con vos es mi pasatiempo favorito",
+  "cada dia q pasa es un dia mas de nuestra historia, y la amo",
+  "nuestra historia recien empieza y ya es la mas linda q conozco",
+  "qiero llenar este contador de dias felices con vos",
+  "dentro de muchos años vamos a mirar esta pagina y nos vamos a reir jsjs",
+  "esta pagina la hice para vos porque te mereces algo tuyo, solo tuyo",
+  "cada vez q entres aca acordate q alguien te ama un monton",
+  "si entraste hoy a ver tu mensaje, gracias, me hace muy feliz",
+  "si estas aca es porque te acordaste de mi, y yo me acuerdo de vos siempre",
+  "q lindo q volviste, te estaba esperando jsjs",
+  "este es tu rinconcito, aca siempre vas a encontrar amor",
+  "te amo, y mañana vas a encontrar otro mensaje diciendote lo mismo pero distinto jsjs",
+  "hoy el mensaje es cortito, te amo, nada mas q eso, pero es todo",
+  "no se como hacer para q entiendas cuanto te amo, asi q te lo voy a decir todos los dias",
+  "algunos dias me salen las palabras y otros no, pero el amor esta siempre",
+  "aunque me equivoque escribiendo, lo q siento nunca se equivoca",
+  "perdon por mis faltas de ortografia, pero te amo sin faltas jsjs",
+  "mi corazon no sabe de ortografia pero sabe q te ama",
+  "si una frase no me sale bien es porque me pongo nervioso pensando en vos",
+  "q dificil es elegir una sola frase para hoy cuando tengo mil cosas lindas para decirte",
+  "hoy te elijo, mañana te elijo, pasado tambien, ya entendiste jsjs",
+  "no hay dia en el calendario en q no te ame",
+  "si el dia fue largo, aca tenes tu premio, un te amo gigante",
+  "sos mi mejor parte del dia, siempre",
+  "tu bienestar me importa muchisimo, cuidate por favor",
+  "dormi bien hoy eh, q te qiero descansadita",
+  "si estas con sueño, anda a dormir, q el mensaje de mañana te espera jsjs",
+  "abrigate si hace frio, no qiero q te enfermes mi amor",
+  "si hace calor toma agua, q te qiero bien fresquita jsjs",
+  "si algo te salio mal hoy, no pasa nada, mañana sale mejor",
+  "sos buena en tantas cosas q ni te das cuenta",
+  "me encanta como te esforzas, aunque no lo veas yo lo veo",
+  "sos inteligente, dulce y hermosa, y lo digo en serio",
+  "lo q sentis es valido, siempre",
+  "llorar no te hace debil, te hace humana, y yo te amo igual",
+  "si un dia estas triste no lo escondas, q yo te qiero acompañar",
+  "aunque estes de mal humor sos hermosa jsjs",
+  "si alguien te hace sentir mal, acordate q para mi sos lo mas valioso",
+  "nadie tiene derecho a apagar tu brillo, nadie",
+  "sos suficiente tal cual sos, no tenes q cambiar nada",
+  "me gustas sin filtro, sin maquillaje, sin nada, me gustas vos",
+  "sos hermosa de una forma q no se puede explicar, solo mirar",
+  "tu belleza es dulce, tranquila y preciosa",
+  "a veces me quedo mirando tus fotos como tonto jsjs",
+  "si me mandas una foto me alegras la semana entera",
+  "en cada foto tuya encuentro algo nuevo q me encanta",
+  "un dia de estos te voy a escribir una carta de verdad, a mano",
+  "si pudiera te mandaria flores todos los dias, por ahora te mando estas palabras",
+  "estas palabras son mis flores para vos, 🌸",
+  "te regalo una estrellita, ⭐, para q la guardes",
+  "aca va un corazon, 💗, es tuyo, como el mio",
+  "te amo en todos los idiomas, i love you, je t aime, ti amo, te amo jsjs",
+  "si fueras una cancion serias mi favorita en todas mis playlists",
+  "si fueras un dia de la semana serias el sabado, el mejor jsjs",
+  "si fueras una estacion serias primavera, linda y llena de flores",
+  "si fueras un color serias rosa clarito, dulce como vos",
+  "si fueras una comida serias mi favorita, obvio",
+  "si fueras un lugar serias mi casa",
+  "si fueras una estrella te pediria todos los deseos, pero ya te tengo",
+  "si fueras un libro te leeria mil veces y no me aburriria nunca",
+  "si fueras un sueño no qerria despertarme jamas",
+  "si me dieran tres deseos los tres serian estar con vos",
+  "en otra vida tambien te buscaria, y te encontraria",
+  "no se q hice para merecerte, pero gracias universo",
+  "creo q el destino sabia lo q hacia cuando nos junto",
+  "de todas las personas del mundo me tocaste vos, q suerte la mia",
+  "sos el mejor plan q tengo",
+  "con vos no necesito nada mas",
+  "mi felicidad tiene tu nombre",
+  "te amo porque si, y tambien por mil razones mas",
+  "si me preguntan por q te amo, digo mira su sonrisa y vas a entender",
+  "amarte es lo mas facil q hice en mi vida",
+  "te amo de una forma tranquila, linda y segura",
+  "conmigo siempre vas a estar segura, te lo prometo",
+  "te prometo cuidarte, respetarte y quererte siempre",
+  "te prometo hacerte reir aunque sea con tonterias jsjs",
+  "te prometo escucharte siempre q lo necesites",
+  "te prometo q nunca vas a estar sola",
+  "te prometo seguir eligiendote todos los dias",
+  "prometo amarte en tus dias buenos y abrazarte en los malos",
+  "no te prometo ser perfecto, pero si darte lo mejor de mi",
+  "lo nuestro es lo mas lindo q tengo y lo voy a cuidar siempre",
+  "esposha, gracias por hacer de mi vida algo tan lindo",
+  "helmosha, te amo hoy y todos los dias q vengan",
+  "preciosa, sos el amor de mi vida",
+  "guapa, nunca te olvides lo mucho q te qiero",
+  "cariño, sos todo para mi",
+  "y si llegaste hasta aca, gracias por leerme todos los dias, te amo con todo mi corazon esposha, y esto recien empieza"
+];
+
+const sobres = [
+  {ic:"🥺", t:"estes triste", m:[
+    "mi amor si estas leyendo esto es porque estas triste y ojala pudiera estar ahi para abrazarte, qiero q sepas q no estas sola, nunca, aca estoy yo y te amo muchisimo, si necesitas llorar llora, no pasa nada, despues hablame y te escucho todo lo q necesites, sos mas fuerte de lo q crees aunque hoy no lo sientas, te amo esposha",
+    "preciosa, los dias tristes tambien pasan, te lo juro, y mientras pasan yo estoy aca agarrandote la mano aunque sea de lejos, no tenes q estar bien todo el tiempo, solo dejame acompañarte, te amo con todo",
+    "helmosha, si hoy todo pesa un monton, respira despacito, abrazate fuerte y hace de cuenta q soy yo, porque eso es lo q haria, despues mandame un mensajito q qiero mimarte, sos lo mas lindo q tengo"
+  ]},
+  {ic:"💭", t:"me extrañes", m:[
+    "yo tambien te extraño, seguro mas jsjs, cerra los ojitos un segundo e imaginate q te estoy abrazando fuerte, porque es justo lo q haria si estuviera ahi, ahora mandame un mensajito q seguro estoy pensando en vos",
+    "extrañarte es lo q mas hago jsjs, pero tambien es lindo porque significa q te tengo, y te tengo para siempre, escribime q me encanta saber q me extrañas",
+    "cariño, cuando me extrañes pensa q en ese mismo momento yo tambien te estoy pensando, siempre pasa, es como q nuestros corazones se llaman solos, te amo"
+  ]},
+  {ic:"🌙", t:"no puedas dormir", m:[
+    "helmosha a dormir eh jsjs, respira despacito, acordate q mañana va a ser un lindo dia, y si igual no podes dormir pensa en nosotros, en todo lo lindo q vamos a vivir juntos, descansa mi amor, te amo mucho",
+    "shhh, cerra los ojitos, imaginate q te estoy acariciando el pelo despacito y q te digo cosas lindas bajito hasta q te dormis, buenas noches preciosa",
+    "si no podes dormir contame ovejitas, o mejor conta cuantas veces te dije te amo hoy, aunque nunca vas a terminar porque te lo digo infinitas jsjs, dulces sueños mi esposha"
+  ]},
+  {ic:"😤", t:"estes enojada conmigo", m:[
+    "perdon amor, de verdad, si te lastime en algo nunca fue mi intencion, a veces me equivoco pero lo q siento por vos es lo mas sincero q tengo, cuando qieras hablamos y lo arreglamos juntos, te amo y no qiero q estes mal por mi",
+    "se q ahora capaz no qieras ni verme jsjs, y esta bien, tomate tu tiempo, pero acordate q nada es mas importante para mi q vos, ni tener razon, ni nada, te amo esposha",
+    "aunque estemos enojados seguimos siendo nosotros, y eso no cambia, cuando estes lista aca estoy para escucharte y pedirte perdon las veces q haga falta, sos lo mas lindo q tengo"
+  ]},
+  {ic:"🪞", t:"te sientas insegura", m:[
+    "preciosa escuchame, sos hermosa, tus ojitos, tu pelo, tu carita, tu voz, todo, pero no solo eso, sos buena, dulce, valiente, y yo te elegi a vos y te elijo todos los dias, no hay nadie mas, solo vos",
+    "si te miras al espejo y no te gusta lo q ves, mirate con mis ojos, vas a ver una chica preciosa, con un pelo hermoso, unos ojitos q enamoran y una sonrisa q me da vida",
+    "no te compares con nadie, no existe nadie como vos, y para mi no existe nadie mas, sos suficiente, sos hermosa y sos amada, muchisimo"
+  ]},
+  {ic:"✨", t:"estes feliz", m:[
+    "aaa q lindo q estes feliz, me pone feliz a mi tambien, disfrutalo mucho y despues contame todo eh, me encanta verte sonreir",
+    "tu felicidad es mi felicidad, asi q ahora somos dos felices jsjs, guarda este momento lindo y despues compartilo conmigo",
+    "q lindo verte asi, te lo mereces mas q nadie, ojala todos tus dias sean asi de lindos, te amo mi preciosa"
+  ]},
+  {ic:"🌧️", t:"tengas un mal dia", m:[
+    "ya paso amor, ya paso, el dia fue feo pero ya se termina, date un baño calentito, come algo rico y hablame, q te voy a mimar todo lo q pueda, sos mi prioridad siempre",
+    "un mal dia no es una mala vida, mañana arrancamos de nuevo, y hoy te dejo este abrazo enorme para q descanses, hiciste lo mejor q pudiste y estoy orgulloso",
+    "q bronca q hayas tenido un dia feo, si pudiera me lo llevaria todo yo, por ahora te mando muchos besitos y un te amo bien grande"
+  ]},
+  {ic:"🤍", t:"dudes de lo q siento", m:[
+    "nunca dudes de lo q siento, te amo desde ese 25 de marzo y cada dia mas, no es algo q vaya a cambiar, sos mi esposha y lo vas a ser siempre",
+    "si dudas, mira este contador, cada segundo q pasa es un segundo q te sigo eligiendo, y no pienso parar jsjs",
+    "lo q siento por vos es lo mas seguro q tengo en la vida, si alguna vez no te lo demuestro bien decimelo, q no qiero q dudes nunca, te amo"
+  ]},
+  {ic:"🫂", t:"necesites un abrazo", m:[
+    "abrazo gigante de esos q aprietan fuerte y no se terminan, ahora pedime uno de verdad q te lo debo jsjs, te amo cariño",
+    "aca va, 🫂, uno largo, apretadito, con la cabecita en mi pecho y yo acariciandote el pelo, quedate ahi el tiempo q necesites",
+    "te mando el abrazo mas calentito del mundo, de esos q te arreglan todo, y despues otro mas por si el primero no alcanza jsjs"
+  ]},
+  {ic:"💌", t:"qieras saber cuanto te amo", m:[
+    "mas q a nada en este mundo, mas de lo q puedo escribir aca, y aunque no siempre me salgan las palabras perfectas todo lo q te digo es de verdad, te amo Jazmin",
+    "mucho, muchisimo, tanto q hice una pagina entera solo para vos jsjs, y si me alcanzara el tiempo haria mil mas",
+    "te amo tanto q no hay numero q alcance, ni dias q alcancen, ni palabras q alcancen, pero tengo toda la vida para intentar decirtelo"
+  ]}
+];
+
+// contador
+const $ = id => document.getElementById(id);
+function diaActual(){ return Math.max(1, Math.floor((Date.now() - INICIO) / DIA_MS) + 1); }
+function actualizar(){
+  let diff = Math.max(0, Date.now() - INICIO);
+  const d = Math.floor(diff / DIA_MS); diff -= d * DIA_MS;
+  const h = Math.floor(diff / 3600000); diff -= h * 3600000;
+  const m = Math.floor(diff / 60000); diff -= m * 60000;
+  const s = Math.floor(diff / 1000);
+  $('d').textContent = d; $('h').textContent = h;
+  $('m').textContent = m; $('s').textContent = s;
+  $('diaNum').textContent = diaActual();
+}
+actualizar(); setInterval(actualizar, 1000);
+
+// mensaje del dia
+let hoy = diaActual();
+let viendo = hoy;
+function mostrarMensaje(){
+  const caja = $('mensaje');
+  caja.style.opacity = 0;
+  setTimeout(()=>{
+    caja.textContent = frases[(viendo - 1) % frases.length];
+    caja.style.opacity = 1;
+  }, 200);
+  $('etiqueta').textContent = viendo === hoy ? 'hoy 💗' : 'dia ' + viendo;
+  $('prev').disabled = viendo <= 1;
+  $('next').disabled = viendo >= hoy;
+}
+$('prev').onclick = ()=>{ if(viendo>1){viendo--; mostrarMensaje();} };
+$('next').onclick = ()=>{ if(viendo<hoy){viendo++; mostrarMensaje();} };
+setInterval(()=>{ const n = diaActual(); if(n !== hoy){ hoy = n; viendo = n; mostrarMensaje(); } }, 30000);
+mostrarMensaje();
+
+// sobres: siempre cerrados al entrar, nada se guarda, mensaje al azar entre 3
+const ultimo = {};
+const cont = $('sobres');
+sobres.forEach((s,i)=>{
+  const b = document.createElement('button');
+  b.className = 'sobre';
+  b.innerHTML = `<span class="ic">✉️</span>cuando ${s.t}`;
+  b.onclick = ()=>{
+    let k;
+    do { k = Math.floor(Math.random() * s.m.length); } while (s.m.length > 1 && k === ultimo[i]);
+    ultimo[i] = k;
+    $('cartaTitulo').textContent = s.ic + ' cuando ' + s.t;
+    $('cartaTexto').textContent = s.m[k];
+    $('modal').classList.add('abierto');
+    lluvia(14);
+  };
+  cont.appendChild(b);
+});
+$('cerrar').onclick = ()=> $('modal').classList.remove('abierto');
+$('modal').onclick = e => { if(e.target.id==='modal') $('modal').classList.remove('abierto'); };
+
+// corazones flotantes
+const emojis = ['💗','💕','💖','🌸','🤍'];
+function corazon(){
+  const c = document.createElement('div');
+  c.className = 'flotante';
+  c.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+  c.style.left = Math.random()*100 + 'vw';
+  c.style.fontSize = (14 + Math.random()*18) + 'px';
+  c.style.animationDuration = (7 + Math.random()*6) + 's';
+  $('corazones').appendChild(c);
+  setTimeout(()=>c.remove(), 14000);
+}
+function lluvia(n){ for(let i=0;i<n;i++) setTimeout(corazon, i*90); }
+setInterval(corazon, 900);
+</script>
+</body>
+</html>
